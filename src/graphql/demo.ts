@@ -8,3 +8,8 @@ query find($id: String!){
     }
   }
 `;
+export const UPDATE = gql`
+mutation update($id: String!,$params: UserInput!){
+    update(id: $id, params: $params)
+  }
+`;
