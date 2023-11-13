@@ -9,7 +9,7 @@ dependencies:
     specifier: ^3.7.1
     version: 3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
   antd-mobile:
-    specifier: ^5.30.0
+    specifier: ^5.26.0
     version: 5.30.0(react-dom@18.2.0)(react@18.2.0)
   antd-mobile-icons:
     specifier: ^0.3.0

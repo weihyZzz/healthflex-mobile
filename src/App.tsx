@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client';
 import './App.css';
-import { useState } from 'react';
+import {
+  Button, Calendar, Form, Input,
+} from 'antd-mobile';
+import { useEffect } from 'react';
 import { FIND, UPDATE } from './graphql/demo';
 
 const App = () => {
@@ -10,46 +13,55 @@ const App = () => {
     },
   });
   const [update] = useMutation(UPDATE);
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-
-  const onChangeNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-  const onChangeDescHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDesc(e.target.value);
-  };
-  const onClickHandler = () => {
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-prefers-color-scheme',
+      'dark',
+    );
+  }, []);
+  const onClickHandler = (v: any) => {
     update({
       variables: {
         id: '22820297-e288-42ba-aadf-3a4062c5c3cb',
         params: {
-          desc,
-          name,
+          ...v,
         },
       },
     });
   };
   return (
     <div>
+      <Calendar
+        selectionMode="single"
+      />
       <p>
         data:
         {' '}
         {JSON.stringify(data)}
       </p>
       <p>{`${loading}`}</p>
-
-      <p>
-        name:
-        <input type="text" onChange={onChangeNameHandler} />
-      </p>
-      <p>
-        desc:
-        <input type="text" onChange={onChangeDescHandler} />
-      </p>
-      <p>
-        <button type="button" onClick={onClickHandler}>更新</button>
-      </p>
+      <Form
+        layout="horizontal"
+        onFinish={onClickHandler}
+        footer={(
+          <Button block type="submit" color="primary" size="large">
+            提交
+          </Button>
+        )}
+      >
+        <Form.Item
+          name="name"
+          label="姓名"
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="desc"
+          label="描述"
+        >
+          <Input />
+        </Form.Item>
+      </Form>
     </div>
   );
 };
