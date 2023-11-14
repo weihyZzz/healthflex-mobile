@@ -1,17 +1,15 @@
-import { useMutation, useQuery } from '@apollo/client';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useMutation } from '@apollo/client';
 import './App.css';
 import {
-  Button, Calendar, Form, Input,
+  Button, Form, ImageUploader, Input,
 } from 'antd-mobile';
 import { useEffect } from 'react';
-import { FIND, UPDATE } from './graphql/demo';
+import { UPDATE } from './graphql/demo';
+import { useUploadOss } from './hooks/useUploadOSS';
 
 const App = () => {
-  const { loading, data } = useQuery(FIND, {
-    variables: {
-      id: '22820297-e288-42ba-aadf-3a4062c5c3cb',
-    },
-  });
+  const uploadHandler = useUploadOss();
   const [update] = useMutation(UPDATE);
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -31,15 +29,9 @@ const App = () => {
   };
   return (
     <div>
-      <Calendar
-        selectionMode="single"
+      <ImageUploader
+        upload={uploadHandler}
       />
-      <p>
-        data:
-        {' '}
-        {JSON.stringify(data)}
-      </p>
-      <p>{`${loading}`}</p>
       <Form
         layout="horizontal"
         onFinish={onClickHandler}
