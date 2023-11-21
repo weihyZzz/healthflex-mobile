@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 
 import * as md5 from 'md5';
 
+import { useNavigate } from 'react-router-dom';
 import { STUDENT_REGISTER } from '../../graphql/user';
 import style from './index.module.less';
 import { showFail, showSuccess } from '../../utils';
@@ -17,6 +18,7 @@ interface IValue {
 const Register = () => {
   const [form] = Form.useForm();
   const [register, { loading }] = useMutation(STUDENT_REGISTER);
+  const nav = useNavigate();
   const onRegisterHandler = async (values: IValue) => {
     console.log('values', values);
     const res = await register({
@@ -28,6 +30,7 @@ const Register = () => {
     console.log('res', res);
     if (res.data.studentRegister.code === 200) {
       showSuccess(res.data.studentRegister.message);
+      nav('/login');
     } else {
       showFail(res.data.studentRegister);
     }

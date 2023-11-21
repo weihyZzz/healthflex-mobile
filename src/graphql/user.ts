@@ -8,3 +8,12 @@ mutation studentRegister($account: String!,$password: String!) {
     }
   }
 `;
+export const STUDENT_LOGIN = gql`
+mutation studentLogin($account: String!,$password: String!) {
+  studentLogin(account: $account,password: $password){
+    code
+    message
+    data
+  }
+}
+`;
