@@ -11,12 +11,12 @@ import { useUploadOss } from './hooks/useUploadOSS';
 const App = () => {
   const uploadHandler = useUploadOss();
   const [update] = useMutation(UPDATE);
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-prefers-color-scheme',
-      'dark',
-    );
-  }, []);
+  // useEffect(() => {
+  //   document.documentElement.setAttribute(
+  //     'data-prefers-color-scheme',
+  //     'dark',
+  //   );
+  // }, []);
   const onClickHandler = (v: any) => {
     update({
       variables: {

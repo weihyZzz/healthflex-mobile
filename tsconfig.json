@@ -14,13 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["vitest/globals"],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+    "jsx": "react-jsx"
   },
   "include": ["./"],
   "references": [{ "path": "./tsconfig.node.json" }]
