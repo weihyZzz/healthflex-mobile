@@ -9,7 +9,9 @@ export const useUploadOss = () => {
   const uploadHandler = async (file: File) => {
     const formData = new FormData();
     const data = d.getOSSInfo;
-    const key = `images/${file.name}`;
+    const suffix = file.name.slice(file.name.lastIndexOf('.'));
+    const filename = Date.now() + suffix;
+    const key = `images/${filename}`;
     formData.append('key', key);
     formData.append('policy', data.policy);
     formData.append('OSSAccessKeyId', data.accessId);

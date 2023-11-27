@@ -7,6 +7,8 @@ import * as md5 from 'md5';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_TOKEN } from '@/utils/constants';
+import { useUserContext } from '@/hooks/userHooks';
 import { STUDENT_LOGIN } from '../../graphql/user';
 import style from './index.module.less';
 import { showFail, showSuccess } from '../../utils';
@@ -22,6 +24,7 @@ const Login = () => {
   const [form] = Form.useForm();
   const [visiable, setVisiable] = useState(false);
   const [login, { loading }] = useMutation(STUDENT_LOGIN);
+  const { store } = useUserContext();
   const nav = useNavigate();
   const loginHandler = async (values: IValue) => {
     const res = await login({
@@ -33,6 +36,9 @@ const Login = () => {
     });
     if (res.data.studentLogin.code === 200) {
       showSuccess(res.data.studentLogin.message);
+      store.refetchHandler();
+      localStorage.setItem(AUTH_TOKEN, res.data.studentLogin.data);
+      console.log('res.data.studentLogin', res.data.studentLogin);
       nav('/');
       return;
     }

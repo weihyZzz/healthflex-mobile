@@ -17,3 +17,26 @@ mutation studentLogin($account: String!,$password: String!) {
   }
 }
 `;
+
+export const GET_STUDENT_INFO = gql`
+query getStudentInfo {
+  getStudentInfo{
+    code
+    message
+    data {
+      name
+      id
+      avatar
+      tel
+    }
+  }
+}
+`;
+export const COMMIT_STUDENT_INFO = gql`
+mutation commitStudentInfo($params: StudentInput!) {
+  commitStudentInfo(params: $params) {
+    code
+    message
+  }
+}
+`;

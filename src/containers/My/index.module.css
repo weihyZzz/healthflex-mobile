@@ -1,0 +1,8 @@
+.container .logo {
+  padding: 30px;
+  text-align: center;
+}
+.container .logo img {
+  width: 80%;
+  margin: auto;
+}
