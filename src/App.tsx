@@ -5,8 +5,8 @@ import {
   Button, Form, ImageUploader, Input,
 } from 'antd-mobile';
 import { useEffect } from 'react';
-import { UPDATE } from './graphql/demo';
 import { useUploadOss } from './hooks/useUploadOSS';
+import { UPDATE } from './graphql/demo';
 
 const App = () => {
   const uploadHandler = useUploadOss();

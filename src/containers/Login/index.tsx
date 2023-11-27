@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className={style.container}>
       <div className={style.logo}>
-        <img src="https://healthflex.oss-cn-beijing.aliyuncs.com/images/logo.jpg" alt="" />
+        <img src="https://healthflex.oss-cn-beijing.aliyuncs.com/images/logo_width.png" alt="" />
       </div>
       <Form
         form={form}
