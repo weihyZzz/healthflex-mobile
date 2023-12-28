@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <div className={style.container}>
       <div className={style.logo}>
-        <img src="https://water-drop-assets.oss-cn-hangzhou.aliyuncs.com/images/henglogo.png" alt="" />
+        <img src="https://healthflex.oss-cn-beijing.aliyuncs.com/images/logo_width.png" alt="" />
       </div>
       <Form
         layout="horizontal"
