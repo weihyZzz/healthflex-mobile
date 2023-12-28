@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { GET_OSS_INFO } from '../graphql/oss';
 
-export const useUploadOss = () => {
-  // 1.获取签名信息
+export const useUploadOSS = () => {
+  // 1 获取到签名信息
+  // 2 fetch post 请求把参数传到服务端
   const { data: d } = useQuery(GET_OSS_INFO);
-  console.log('data:', d);
-  //   2.执行fetch post请求，将参数传递到服务端
+
   const uploadHandler = async (file: File) => {
     const formData = new FormData();
     const data = d.getOSSInfo;
@@ -24,5 +24,6 @@ export const useUploadOss = () => {
     });
     return { url: res.url + key };
   };
+
   return uploadHandler;
 };

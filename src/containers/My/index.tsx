@@ -1,23 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-empty-pattern */
-import { useUserContext } from '@/hooks/userHooks';
-import {
-  Button, Form, ImageUploader, Input,
-} from 'antd-mobile';
-import { useUploadOss } from '@/hooks/useUploadOSS';
-import classNames from 'classnames';
-import { useEffect } from 'react';
-import { showFail, showSuccess } from '@/utils';
 import { useMutation } from '@apollo/client';
+import {
+  Button, Form, Input, ImageUploader,
+} from 'antd-mobile';
+import classNames from 'classnames';
+import { useUploadOSS } from '@/hooks/useUploadOSS';
 import { COMMIT_STUDENT_INFO } from '@/graphql/user';
 import { IStudent } from '@/utils/types';
+import { showFail, showSuccess } from '@/utils';
+import { useEffect } from 'react';
+import { useUserContext } from '@/hooks/userHooks';
 import style from './index.module.less';
 
-/**
-*
-*/
 const App = () => {
-  const uploadHandler = useUploadOss();
+  const uploadHandler = useUploadOSS();
   const [commit] = useMutation(COMMIT_STUDENT_INFO);
   const [form] = Form.useForm();
   const { store } = useUserContext();
@@ -32,6 +27,7 @@ const App = () => {
       }],
     });
   }, [store]);
+
   const onClickHandler = async (v: IStudent & { avatar: [{ url:string }] }) => {
     const res = await commit(
       {
@@ -49,10 +45,11 @@ const App = () => {
     }
     showFail(res.data.commitStudentInfo.message);
   };
+
   return (
     <div className={style.container}>
       <div className={style.logo}>
-        <img src="https://healthflex.oss-cn-beijing.aliyuncs.com/images/logo_width.png" alt="" />
+        <img src="https://water-drop-assets.oss-cn-hangzhou.aliyuncs.com/images/henglogo.png" alt="" />
       </div>
       <Form
         form={form}
@@ -62,7 +59,7 @@ const App = () => {
           <Button block type="submit" color="primary" size="large">
             提交
           </Button>
-        )}
+      )}
       >
         <Form.Header>请提交个人信息，都是必填的</Form.Header>
         <Form.Item
@@ -105,4 +102,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;

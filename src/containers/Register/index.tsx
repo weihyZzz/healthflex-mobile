@@ -1,54 +1,54 @@
-import { Input, Form, Button } from 'antd-mobile';
+import {
+  Button, Form, Input,
+} from 'antd-mobile';
 import { useMutation } from '@apollo/client';
-
+import { Link, useNavigate } from 'react-router-dom';
 import * as md5 from 'md5';
-
-import { useNavigate } from 'react-router-dom';
 import { STUDENT_REGISTER } from '../../graphql/user';
-import style from './index.module.less';
 import { showFail, showSuccess } from '../../utils';
+import style from './index.module.less';
 
 interface IValue {
-  account: string;
   password: string;
+  account: string;
 }
 /**
-*
+* 注册
 */
 const Register = () => {
   const [form] = Form.useForm();
   const [register, { loading }] = useMutation(STUDENT_REGISTER);
   const nav = useNavigate();
+
   const onRegisterHandler = async (values: IValue) => {
-    console.log('values', values);
     const res = await register({
       variables: {
-        account: values.account,
         password: md5(values.password),
+        account: values.account,
       },
     });
-    console.log('res', res);
     if (res.data.studentRegister.code === 200) {
       showSuccess(res.data.studentRegister.message);
       nav('/login');
-    } else {
-      showFail(res.data.studentRegister);
+      return;
     }
+    const data = res.data.studentRegister;
+    showFail(data);
   };
   return (
     <div className={style.container}>
       <div className={style.logo}>
-        <img src="https://healthflex.oss-cn-beijing.aliyuncs.com/images/logo.jpg" alt="" />
+        <img src="https://water-drop-assets.oss-cn-hangzhou.aliyuncs.com/images/henglogo.png" alt="" />
       </div>
       <Form
         form={form}
         layout="horizontal"
+        onFinish={onRegisterHandler}
         footer={(
-          <Button block type="submit" color="primary" size="large" loading={loading}>
+          <Button loading={loading} block type="submit" color="primary" size="large">
             注册
           </Button>
         )}
-        onFinish={onRegisterHandler}
       >
         <Form.Item
           rules={[{
@@ -74,7 +74,11 @@ const Register = () => {
             message: '有且只能包含小写字母和数字，长度大于 6',
           }]}
         >
-          <Input placeholder="请输入密码" clearable type="password" />
+          <Input
+            placeholder="请输入密码"
+            clearable
+            type="password"
+          />
         </Form.Item>
         <Form.Item
           rules={[{
@@ -96,9 +100,17 @@ const Register = () => {
           label="确认密码"
           name="passwordConfirm"
         >
-          <Input placeholder="请再次输入密码" clearable type="password" />
+          <Input
+            placeholder="请再次输入密码"
+            clearable
+            type="password"
+          />
         </Form.Item>
       </Form>
+      <div>
+        有账号？去
+        <Link to="/login">登录</Link>
+      </div>
     </div>
   );
 };

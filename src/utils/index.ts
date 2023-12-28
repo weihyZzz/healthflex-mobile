@@ -6,9 +6,10 @@ export const showSuccess = (content: string) => {
     icon: 'success',
   });
 };
+
 export const showFail = ({ code, message }: { code: number, message: string }) => {
   Toast.show({
-    content: `${code}: ${message}`,
+    content: `${code}：${message}`,
     icon: 'fail',
   });
 };
