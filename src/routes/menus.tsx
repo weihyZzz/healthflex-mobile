@@ -2,7 +2,8 @@ interface IRoute {
   path: string;
   name: string;
   icon?: React.ReactNode;
-  hideInMenu?: boolean;
+  isMenu?: boolean;
+  hideHeader?: boolean; // 是否隐藏 header
 }
 
 export const ROUTE_KEY = {
@@ -13,11 +14,13 @@ export const ROUTE_KEY = {
 export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEY.HOME]: {
     path: '',
-    name: '首页',
+    name: '精品课程',
+    isMenu: true,
   },
   [ROUTE_KEY.MY]: {
     path: 'my',
-    name: '个人信息',
+    name: '我的',
+    isMenu: true,
   },
 };
 

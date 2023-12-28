@@ -4,10 +4,10 @@ import {
   getRouteByKey, routes,
 } from '@/routes/menus';
 
-export const useTitle = (title: string) => {
+export const useTitle = (title: string | undefined) => {
   useEffect(() => {
-    document.title = title;
-  }, []);
+    document.title = title || 'healthflex';
+  }, [title]);
 };
 
 // 通用页面跳转
@@ -23,7 +23,7 @@ export const useGoTo = () => {
       return;
     }
     const route = getRouteByKey(pageKey);
-    if (route && route.path) {
+    if (route) {
       if (!params) {
         nav(`/${route.path}`);
         return;
