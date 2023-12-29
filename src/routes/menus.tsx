@@ -1,7 +1,10 @@
+import courseSvg from '@/assets/course.svg';
+import mySvg from '@/assets/my.svg';
+
 interface IRoute {
   path: string;
   name: string;
-  icon?: React.ReactNode;
+  icon?: string;
   isMenu?: boolean;
   hideHeader?: boolean; // 是否隐藏 header
 }
@@ -16,11 +19,13 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     path: '',
     name: '精品课程',
     isMenu: true,
+    icon: courseSvg,
   },
   [ROUTE_KEY.MY]: {
     path: 'my',
     name: '我的',
     isMenu: true,
+    icon: mySvg,
   },
 };
 
