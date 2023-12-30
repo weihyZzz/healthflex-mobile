@@ -1,5 +1,6 @@
 import { LeftOutline } from 'antd-mobile-icons';
 import { useGoTo, useMatchedRoute } from '@/hooks';
+import classNames from 'classnames';
 import style from './index.module.less';
 
 /**
@@ -15,7 +16,11 @@ const Header = () => {
     return null;
   }
   return (
-    <div className={style.container}>
+    <div className={classNames({
+      [style.containerLarge]: route?.isMenu,
+      [style.containerSmall]: !route?.isMenu,
+    })}
+    >
       {
         !route?.isMenu && (
         <LeftOutline
