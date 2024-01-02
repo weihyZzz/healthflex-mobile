@@ -7,8 +7,8 @@ import TypeSelect from './components/TypeSelect';
 *
 */
 const Home = () => {
-  const onSearchHandler = () => {
-
+  const onSearchHandler = (val: string) => {
+    console.log('val', val);
   };
   const onTypeChangeHandler = (key: string) => {
     console.log('key', key);
