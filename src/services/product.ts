@@ -1,7 +1,8 @@
 import { GET_PRODUCTS, GET_PRODUCT_TYPES } from '@/graphql/product';
-import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
+import { DEFAULT_PAGE_SIZE, DEFAULT_TYPE } from '@/utils/constants';
 import { TProductTypeQuery, TProductsQuery } from '@/utils/types';
 import { useLazyQuery, useQuery } from '@apollo/client';
+import { Toast } from 'antd-mobile';
 import { useEffect } from 'react';
 
 export const useProductTypes = () => {
@@ -18,23 +19,35 @@ export const useProductTypes = () => {
  * @param type
  */
 export const useProducts = (
-  pageNum = 1,
-  pageSize = DEFAULT_PAGE_SIZE,
+  name = '',
   type = '',
 ) => {
   const [get, { data }] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
-  useEffect(() => {
-    get({
+  const init = async (pageNum = 1) => {
+    const toast = Toast.show({
+      icon: 'loading',
+      content: '加载中...',
+    });
+    const res = await get({
+      fetchPolicy: 'network-only',
       variables: {
-        type,
+        name,
+        type: type === DEFAULT_TYPE ? '' : type,
         page: {
           pageNum,
-          pageSize,
+          pageSize: DEFAULT_PAGE_SIZE,
         },
       },
     });
-  }, []);
+    toast.close();
+    return res;
+  };
+  useEffect(() => {
+    init();
+  }, [name, type]);
+  const onRefreshHandler = () => init();
   return {
+    onRefresh: onRefreshHandler,
     data: data?.getProductsForH5.data,
   };
 };
