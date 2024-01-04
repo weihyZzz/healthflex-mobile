@@ -1,9 +1,9 @@
 import { GET_PRODUCTS, GET_PRODUCT_TYPES } from '@/graphql/product';
 import { DEFAULT_PAGE_SIZE, DEFAULT_TYPE } from '@/utils/constants';
-import { TProductTypeQuery, TProductsQuery } from '@/utils/types';
+import { IProduct, TProductTypeQuery, TProductsQuery } from '@/utils/types';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { Toast } from 'antd-mobile';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useProductTypes = () => {
   const { data, loading } = useQuery<TProductTypeQuery>(GET_PRODUCT_TYPES);
@@ -22,7 +22,10 @@ export const useProducts = (
   name = '',
   type = '',
 ) => {
-  const [get, { data }] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
+  const pn = useRef(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [data, setData] = useState<IProduct[]>([]);
+  const [get] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
   const init = async (pageNum = 1) => {
     const toast = Toast.show({
       icon: 'loading',
@@ -40,14 +43,29 @@ export const useProducts = (
       },
     });
     toast.close();
-    return res;
+    return res.data?.getProductsForH5.data || [];
+  };
+  const onRefreshHandler = async () => {
+    const res = await init();
+    setData(res);
   };
   useEffect(() => {
-    init();
+    onRefreshHandler();
   }, [name, type]);
-  const onRefreshHandler = () => init();
+  const loadMoreHandler = async () => {
+    const res = await init(pn.current + 1);
+    if (res.length > 0) {
+      pn.current += 1;
+      setHasMore(true);
+      setData((old) => [...old, ...res]);
+    } else {
+      setHasMore(false);
+    }
+  };
   return {
     onRefresh: onRefreshHandler,
-    data: data?.getProductsForH5.data,
+    loadMore: loadMoreHandler,
+    hasMore,
+    data,
   };
 };

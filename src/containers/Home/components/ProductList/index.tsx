@@ -1,5 +1,6 @@
 import { useProducts } from '@/services/product';
 import { ErrorBlock, Grid, PullToRefresh } from 'antd-mobile';
+import InfiniteScroll from '@/components/InfiniteScroll';
 import style from './index.module.less';
 import ProductCard from '../ProductCard';
 
@@ -14,7 +15,9 @@ const ProductList = ({
   name,
   type,
 }: IProps) => {
-  const { onRefresh, data } = useProducts(name, type);
+  const {
+    onRefresh, data, hasMore, loadMore,
+  } = useProducts(name, type);
   if (data && data.length === 0) {
     return <ErrorBlock status="empty" />;
   }
@@ -32,6 +35,7 @@ const ProductList = ({
           ))}
         </Grid>
       </PullToRefresh>
+      <InfiniteScroll hasMore={hasMore} loadMore={loadMore} />
     </div>
   );
 };
