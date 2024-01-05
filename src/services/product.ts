@@ -13,6 +13,14 @@ export const useProductTypes = () => {
     loading,
   };
 };
+const getPosition = () => new Promise<{ latitude: number, longitude: number }>((r) => {
+  navigator.geolocation.getCurrentPosition((pos) => {
+    const { latitude, longitude } = pos.coords;
+    r({ latitude, longitude });
+  }, () => {
+    r({ latitude: 0, longitude: 0 });
+  });
+});
 /**
  * 获取商品列表
  * @param pageNum
@@ -33,11 +41,14 @@ export const useProducts = (
       icon: 'loading',
       content: '加载中…',
     });
+    const { latitude, longitude } = await getPosition();
     const res = await get({
       fetchPolicy: 'network-only',
       variables: {
         name,
         type: type === DEFAULT_TYPE ? '' : type,
+        latitude,
+        longitude,
         page: {
           pageNum,
           pageSize: DEFAULT_PAGE_SIZE,
