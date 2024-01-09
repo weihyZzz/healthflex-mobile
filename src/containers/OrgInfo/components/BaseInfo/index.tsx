@@ -27,7 +27,7 @@ const BaseInfo = ({
       <div className={style.tags}>
         {
             data.tags?.split(',').map((item) => (
-              <span className={style.tagSpan}>
+              <span className={style.tagSpan} key={item}>
                 <CheckShieldOutline />
                 <span className={style.tagName}>
                   {item}
@@ -44,7 +44,7 @@ const BaseInfo = ({
           {
             [...(data.orgFrontImg || []), ...(data.orgRoomImg || [])].map(
               (item) => (
-                <Swiper.Item>
+                <Swiper.Item key={item.id}>
                   <Image
                     src={item.url}
                     alt="门店图片"

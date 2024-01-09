@@ -12,12 +12,15 @@ query getOrganizationInfo(
         id
         orgFrontImg {
           url
+          id
         }
         orgRoomImg {
           url
+          id
         }
         orgOtherImg {
           url
+          id
         }
         logo
         address
