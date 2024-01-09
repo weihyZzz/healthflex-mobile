@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT_TYPES } from '@/graphql/product';
+import { GET_PRODUCTS, GET_PRODUCTS_BY_ORG_ID, GET_PRODUCT_TYPES } from '@/graphql/product';
 import { DEFAULT_PAGE_SIZE, DEFAULT_TYPE } from '@/utils/constants';
 import { IProduct, TProductTypeQuery, TProductsQuery } from '@/utils/types';
 import { useLazyQuery, useQuery } from '@apollo/client';
@@ -92,4 +92,12 @@ export const useProducts = (
     hasMore,
     data,
   };
+};
+export const useProductsByOrgId = (orgId: string) => {
+  const { data } = useQuery<TProductsQuery>(GET_PRODUCTS_BY_ORG_ID, {
+    variables: {
+      orgId,
+    },
+  });
+  return data?.getProductsByOrgIdForH5.data;
 };

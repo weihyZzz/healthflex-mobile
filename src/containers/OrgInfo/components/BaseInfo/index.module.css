@@ -1,0 +1,52 @@
+.container {
+  background-color: #fff;
+  padding: 10px;
+}
+.container .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.container .title .logo {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+  border: solid 2px #ccc;
+}
+.container .tags .tagSpan {
+  color: #ccc;
+  font-size: 12px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+}
+.container .tags svg {
+  font-size: 14px;
+  margin-right: 5px;
+}
+.container .imgSwiper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.container .address {
+  margin-top: 10px;
+  line-height: 36px;
+}
+.container .address .addressIcon {
+  margin-right: 5px;
+  color: var(--adm-color-primary);
+}
+.container .address .addressText {
+  color: #666;
+}
+.container .address .phoneIcon {
+  color: var(--adm-color-primary);
+  font-size: 20px;
+  border-left: 1px solid #f2f2f2;
+  padding-left: 10px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 2px;
+}
