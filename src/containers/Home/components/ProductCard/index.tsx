@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import { IProduct } from '@/utils/types';
 import { Image } from 'antd-mobile';
 import { useGoTo } from '@/hooks';
@@ -15,10 +13,6 @@ interface IProps {
 const ProductCard = ({
   data,
 }: IProps) => {
-  const [state, setState] = useState();
-  useEffect(() => {
-    console.log(state, setState);
-  }, []);
   const { go } = useGoTo();
   const goOrgInfo = (id: string) => {
     go(ROUTE_KEY.ORG_INFO, {

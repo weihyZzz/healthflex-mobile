@@ -1,6 +1,4 @@
 /* eslint-disable max-len */
-import { useState, useEffect } from 'react';
-
 import { TabBar } from 'antd-mobile';
 import { routes } from '@/routes/menus';
 import { useGoTo, useMatchedRoute } from '@/hooks';
@@ -11,10 +9,6 @@ import SvgWrapper from '../SvgWrapper';
  *
  */
 const Bottom = () => {
-  const [state, setState] = useState();
-  useEffect(() => {
-    console.log(state, setState);
-  }, []);
   const route = useMatchedRoute();
   const { go } = useGoTo();
   const onTabChangeHandler = (key: string) => {
