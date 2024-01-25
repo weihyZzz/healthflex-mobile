@@ -1,0 +1,18 @@
+.container {
+  text-align: center;
+  padding-bottom: 250px;
+}
+.container .title {
+  font-size: 20px;
+  margin-top: 20px;
+}
+.container .desc {
+  font-size: 25px;
+  height: 80px;
+  line-height: 80px;
+}
+.container .amount {
+  font-size: 30px;
+  font-weight: bolder;
+  height: 60px;
+}

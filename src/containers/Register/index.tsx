@@ -3,7 +3,7 @@ import {
 } from 'antd-mobile';
 import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
-import * as md5 from 'md5';
+import md5 from 'md5';
 import { STUDENT_REGISTER } from '../../graphql/user';
 import { showFail, showSuccess } from '../../utils';
 import style from './index.module.less';

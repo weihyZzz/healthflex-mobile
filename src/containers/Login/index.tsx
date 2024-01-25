@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as md5 from 'md5';
+import md5 from 'md5';
 import { Button, Form, Input } from 'antd-mobile';
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons';
 import { useMutation } from '@apollo/client';
