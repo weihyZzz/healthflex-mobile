@@ -14,7 +14,8 @@ const ProductCard = ({
   data,
 }: IProps) => {
   const { go } = useGoTo();
-  const goOrgInfo = (id: string) => {
+  const goOrgInfo = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
     go(ROUTE_KEY.ORG_INFO, {
       id,
     });
@@ -32,7 +33,7 @@ const ProductCard = ({
         <div className={style.org}>
           <span
             className={style.orgName}
-            onClick={() => goOrgInfo(data.org.id)}
+            onClick={(e) => goOrgInfo(data.org.id, e)}
           >
             {data.org.name}
 

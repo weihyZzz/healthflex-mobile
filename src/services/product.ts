@@ -58,8 +58,10 @@ export const useProducts = (
           pageSize: DEFAULT_PAGE_SIZE,
         },
       },
+      onCompleted() {
+        toast.close();
+      },
     });
-    toast.close();
     return res.data?.getProductsForH5.data || [];
   };
 
