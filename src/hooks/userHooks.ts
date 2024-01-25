@@ -21,10 +21,10 @@ export const useGetStudent = () => {
     onCompleted: (data) => {
       if (data.getStudentInfo) {
         const {
-          id, name, tel, avatar,
+          id, name, tel, avatar, openid,
         } = data.getStudentInfo.data;
         setStore({
-          id, name, tel, avatar, refetchHandler: refetch,
+          id, name, tel, avatar, openid, refetchHandler: refetch,
         });
         // 当前在登录页面，且已经登录了，那就直接跳到首页
         if (location.pathname === '/login') {

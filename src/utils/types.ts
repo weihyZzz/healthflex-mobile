@@ -3,6 +3,7 @@ export interface IStudent {
   tel: string;
   name: string;
   avatar: string;
+  openid: string;
 }
 export interface IPage {
   pageNum: number;
