@@ -39,7 +39,11 @@ const Buy = () => {
     }
 
     if (typeof WeixinJSBridge !== 'undefined') {
-      const wxConfig = await getWxConfig(id, data.preferentialPrice * count);
+      const wxConfig = await getWxConfig(
+        id,
+        count,
+        data.preferentialPrice * count,
+      );
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest',
         {
@@ -65,7 +69,11 @@ const Buy = () => {
       Toast.show({
         content: '请在微信中打开该页面',
       });
-      const wxConfig = await getWxConfig(id, data.preferentialPrice * count);
+      const wxConfig = await getWxConfig(
+        id,
+        count,
+        data.preferentialPrice * count,
+      );
       console.log('wxConfig', wxConfig);
       // 下列代码用于模拟支付成功
       setShowResult({
